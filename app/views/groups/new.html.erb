@@ -1,0 +1,11 @@
+<%= form_tag groups_path do %>
+    <%= hidden_field_tag :'group[mod_id]', current_user.id %> 
+    <label>Group Name: </label>
+    <%= text_field_tag :'group[name]' %>
+    <br>
+    
+    <label>Group Bio: </label>
+    <%= text_field_tag :'group[bio]' %>
+    <%= submit_tag "Submit"%>
+<% end %>
+    

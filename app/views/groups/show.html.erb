@@ -1,0 +1,14 @@
+<br>
+<br>
+<br>
+<%= @group.name %>
+
+<%= link_to "Create Post", new_group_post_path(current_group) %>
+<% current_group.posts.each do |post| %>
+    <%= post.title %>
+<% end %>
+<% if group_mod_check %>
+    <p> yay </p>
+<% else %>
+    <p> nay </p>
+<% end %>

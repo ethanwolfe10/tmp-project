@@ -1,0 +1,13 @@
+<%= form_tag group_posts_path do %>
+    <%= hidden_field_tag :'post[user_id]', current_user.id %> 
+    <%= hidden_field_tag :'post[group_id]', params[:group_id] %> 
+
+    <label>Post Title: </label>
+    <%= text_field_tag :'post[title]' %>
+    <br>
+    <label>Post Content: </label>
+    <%= text_field_tag :'post[content]' %>
+    <br>
+    <%= submit_tag "Create Post" %>
+<% end %>
+
