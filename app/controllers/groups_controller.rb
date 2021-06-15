@@ -4,7 +4,9 @@ class GroupsController < ApplicationController
     end
 
     def create
-        @group = Group.new(group_params)
+        # binding.pry
+        @group = Group.create(group_params)
+        binding.pry
         if @group.save
             redirect_to group_path(@group)
         else

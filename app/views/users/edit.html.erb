@@ -1,0 +1,9 @@
+<%= form_for current_user do |f| %>
+    <%= f.label :display_name %>
+    <%= f.text_field :display_name %>
+    <br>
+    <%= f.label :bio %>
+    <%= f.text_field :bio %>
+    <br>
+    <%= f.submit "Update Profile" %>
+<% end %>

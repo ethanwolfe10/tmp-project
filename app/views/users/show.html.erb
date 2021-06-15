@@ -1,5 +1,14 @@
 <h1>Profile Page</h1>
+<%= current_user.display_name %>
+<%= current_user.username %>
+<%= current_user.bio %>
+<br>
 
+<%= link_to "Edit Profile", edit_user_path %>
 
 <%= link_to "Create New Group", new_group_path %>
+
+<%= user_groups.each do |group| %>
+    <%= group.title %>
+<% end %>
 
