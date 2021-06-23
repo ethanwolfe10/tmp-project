@@ -12,7 +12,6 @@ class Group < ApplicationRecord
     private
 
     def create_first_subscriber
-        binding.pry
         Subscription.create(user_id: mod_id, group_id: self.id, moderator: true, confirmed: true)
     end
 

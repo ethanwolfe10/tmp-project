@@ -5,10 +5,24 @@
 <br>
 
 <%= link_to "Edit Profile", edit_user_path %>
+<br>
 
 <%= link_to "Create New Group", new_group_path %>
+<br>
 
-<%= user_groups.each do |group| %>
-    <%= group.title %>
+<h1> Joined Groups </h1>
+
+<% all_user_groups(true).each do |group| %>
+    <%= group.name %><br>
+    <%= group.id %><br>
 <% end %>
+<br>
+
+<h1> Pending Invites </h1>
+
+<% all_user_groups.each do |group| %>
+    <%= group.name %><br>
+    <%= group.id %><br>
+<% end %>
+
 

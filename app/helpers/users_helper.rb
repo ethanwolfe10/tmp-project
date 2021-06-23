@@ -1,8 +1,9 @@
 module UsersHelper
 
-    def user_groups
+    def all_user_groups(invite=false)
         binding.pry
-        Group.find(current_user.subscriptions.map(&:group_id))
+        Group.where(id: Subscription.where(user_id: current_user.id, confirmed: invite).map(&:group_id))
     end
+
 
 end
