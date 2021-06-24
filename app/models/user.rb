@@ -16,6 +16,9 @@ class User < ApplicationRecord
   has_many :comments
   has_many :posts
 
+  validates :username, presence: true, uniqueness: true, length: { in 5..20 }
+  
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   devise :omniauthable, omniauth_providers: %i[facebook]
