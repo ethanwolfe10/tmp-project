@@ -1,6 +1,6 @@
 class Subscription < ApplicationRecord
     belongs_to :group
-    belongs_to :user
+    belongs_to :subscriber, class_name: "User", foreign_key: "user_id"
 
     validates :user_id, presence: true
     validates :group_id, presence: true
