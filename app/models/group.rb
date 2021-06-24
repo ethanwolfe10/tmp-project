@@ -1,6 +1,6 @@
 class Group < ApplicationRecord
     has_many :subscriptions
-    has_many :subscribers, class_name: "User", foreign_key: "user_id", through: :subscriptions
+    has_many :subscribers, -> { Subscription.accepted },  class_name: "User", foreign_key: "user_id", through: :subscriptions
     has_many :posts
 
     validates :name, presence: true, length: { in: 4..15 }
