@@ -12,15 +12,12 @@
 
 <h1> Joined Groups </h1>
 
-<% all_user_groups(true).each do |group| %>
-    <%= group.name %><br>
-    <%= group.id %><br>
-<% end %>
+<%= render partial: 'groups/index', locals: {user: current_user} %>
 <br>
 
 <h1> Pending Invites </h1>
 
-<% all_user_groups.each do |group| %>
+<% all_user_groups(current_user, true).each do |group| %>
     <%= group.name %><br>
     <%= group.id %><br>
 <% end %>

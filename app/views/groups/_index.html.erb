@@ -1,0 +1,14 @@
+<% all_user_groups(user, true).each do |group| %>
+    <div>
+        <%= group.name %>
+        <br>
+        Moderator: <%= who_is_mod(group) %>
+        <br>
+        Members: 
+        <% group.subscribers.each do |user| %>
+            <%= user.username %>
+        <% end %>
+    </div>
+    <br>
+<% end %>
+    
