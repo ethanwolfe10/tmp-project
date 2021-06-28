@@ -1,0 +1,25 @@
+<h1>Profile Page</h1>
+<%= user_profile.display_name %>
+<%= user_profile.username %>
+<%= user_profile.bio %>
+<br>
+
+<%= link_to "Edit Profile", edit_user_path %>
+<br>
+
+<%= link_to "Create New Group", new_group_path %>
+<br>
+
+<h1> Joined Groups </h1>
+
+<%= render partial: 'groups/index', locals: {user: user_profile} %>
+<br>
+
+<h1> Pending Invites </h1>
+
+<% all_user_groups(user_profile, true).each do |group| %>
+    <%= group.name %><br>
+    <%= group.id %><br>
+<% end %>
+
+
