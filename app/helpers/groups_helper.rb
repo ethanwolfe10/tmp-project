@@ -1,11 +1,11 @@
 module GroupsHelper
 
     def current_group
-        Group.find(params[:id])
+        Group.where(id: params[:id]).or(Group.where(id: params[:group_id])).first
     end
 
     def who_is_mod(group)
-        User.find(group.mod_id).username
+        User.find(group.mod_id)
     end
 
     def group_mod_check

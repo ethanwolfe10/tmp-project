@@ -4,10 +4,12 @@ class Group < ApplicationRecord
     has_many :posts
 
     validates :name, presence: true, length: { in: 4..15 }
-    validates :bio, presence: true, length: { in: 1..50 }
+    validates :bio, length: { in: 1..50 }
     validates :mod_id, presence: true
 
     after_create :create_first_subscriber
+
+
 
     private
 

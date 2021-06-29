@@ -3,7 +3,7 @@
 <%= user_profile.username %>
 <%= user_profile.bio %>
 <br>
-<%= user_profile.followers.count %> Followers |
+<%= user_profile.followers.count %> <%= link_to 'Followers', user_follows_path(user_profile, :query => 'followers') %> |
 <%= user_profile.followings.count %> Following
 
 <% if user_profile != current_user %>

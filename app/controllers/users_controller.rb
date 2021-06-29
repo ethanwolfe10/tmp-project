@@ -1,7 +1,14 @@
 class UsersController < ApplicationController
 
+    def index
+        
+    end
+
     def show
         @user = User.find(params[:id])
+        if current_user == @user
+            render 'showself'            
+        end
     end
 
     def edit
