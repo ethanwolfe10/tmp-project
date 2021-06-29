@@ -1,0 +1,7 @@
+<% if user_profile != current_user %>
+    <% if not_following? == true %>
+        <%= button_to "Follow", user_follows_path(user_profile) %>
+    <% else %>
+        <%= button_to "Unfollow", user_follow_path(user_profile, not_following?), method: :delete %>
+    <% end %>
+<% end %>

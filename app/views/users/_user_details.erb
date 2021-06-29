@@ -1,0 +1,7 @@
+<p>
+    <%= user_profile.display_name %>
+    <%= user_profile.username %>
+    <%= user_profile.bio %>
+    <%= user_profile.followers.count %>
+    <%= render 'follows/follow_button', user_profile: user_profile %>
+</p>
