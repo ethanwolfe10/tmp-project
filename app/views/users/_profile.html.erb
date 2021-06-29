@@ -3,23 +3,39 @@
 <%= user_profile.username %>
 <%= user_profile.bio %>
 <br>
+<%= user_profile.followers.count %> Followers |
+<%= user_profile.followings.count %> Following
 
-<%= link_to "Edit Profile", edit_user_path %>
+<% if user_profile != current_user %>
+    <% if not_following? == true %>
+        <%= button_to "Follow", user_follows_path(user_profile) %>
+    <% else %>
+        <%= button_to "Unfollow", user_follow_path(user_profile, not_following?), method: :delete %>
+    <% end %>
+<% end %>
 <br>
 
-<%= link_to "Create New Group", new_group_path %>
-<br>
+
+<% if user_profile == current_user %>
+    <%= link_to "Edit Profile", edit_user_path %>
+    <br>
+
+    <%= link_to "Create New Group", new_group_path %>
+    <br>
+
+    <h1> Pending Invites </h1>
+
+    <% all_user_groups(user_profile, true).each do |group| %>
+        <%= group.name %><br>
+        <%= group.id %><br>
+    <% end %>
+<% end %>
 
 <h1> Joined Groups </h1>
 
 <%= render partial: 'groups/index', locals: {user: user_profile} %>
 <br>
 
-<h1> Pending Invites </h1>
 
-<% all_user_groups(user_profile, true).each do |group| %>
-    <%= group.name %><br>
-    <%= group.id %><br>
-<% end %>
 
 

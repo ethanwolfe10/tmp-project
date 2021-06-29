@@ -5,9 +5,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
+
   resources :users, only: [:edit, :update] 
-  resources :users, only: [:show] do
-    resources :posts, only: [:index, :edit, :update]
+  resources :users, only: [:show, :showself] do
+    resources :follows, only: [:create, :destroy]
     resources :subscriptions, only: [:index, :edit, :update]
   end
 
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :groups
   resources :groups, only: [:show] do
+    resources :users, only: [:index]
     resources :posts, only: [:new, :show, :create]
   end
 
