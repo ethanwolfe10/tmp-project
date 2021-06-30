@@ -11,10 +11,11 @@ class User < ApplicationRecord
   has_many :given_follows, foreign_key: :follower_id, class_name: "Follow"
   has_many :followings, through: :given_follows, source: :followed_user
   
-  has_many :posts, through: :groups
-  has_many :likes
-  has_many :comments
+  # has_many :posts, through: :groups
   has_many :posts
+  has_many :likes, through: :posts
+  has_many :comments, through: :posts
+  
 
   # validates :username, presence: true, uniqueness: true, length: { in 5..20 }
   

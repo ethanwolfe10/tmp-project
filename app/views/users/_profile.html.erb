@@ -13,6 +13,7 @@
 
 
 <% if user_profile == current_user %>
+    <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
     <%= link_to "Edit Profile", edit_user_path %>
     <br>
 
@@ -21,15 +22,12 @@
 
     <h1> Pending Invites </h1>
 
-    <% all_user_groups(user_profile, true).each do |group| %>
-        <%= group.name %><br>
-        <%= group.id %><br>
-    <% end %>
+    
 <% end %>
 
 <h1> Joined Groups </h1>
 
-<%= render partial: 'groups/index', locals: {user: user_profile} %>
+<%= render partial: 'groups/index', locals: {user_profile: user_profile} %>
 <br>
 
 

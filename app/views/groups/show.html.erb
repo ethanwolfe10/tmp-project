@@ -4,17 +4,15 @@
 <%= @group.name %>
 <%= @group.bio %>
 
-Moderator: <%= link_to who_is_mod(current_group).username, user_path(who_is_mod(current_group)) %>
-<%= link_to "Confirmed Members", group_users_path(current_group), method: :get %>
+Moderator: <%= link_to @group.mod.username, user_path(@group.mod) %>
+<%= link_to "Confirmed Members", group_users_path(@group), method: :get %>
 
-<%= link_to "Create Post", new_group_post_path(current_group) %>
+<% if confirmed_member(@group) %>
+    <%= button_to 'Invite New Members', new_group_subscription_path(@group), method: :get %>
+<% end %>
+
+<%= link_to "Create Post", new_group_post_path(@group) %>
 <br>
 <br>
 <%= render partial: 'posts/post_details', collection: @group.posts, as: :post %>
 <br>
-
-<% if group_mod_check %>
-    <p> yay </p>
-<% else %>
-    <p> nay </p>
-<% end %>

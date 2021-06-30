@@ -1,19 +1,17 @@
 class FollowsController < ApplicationController
 
     def index
-        @user = User.find(params[:id])
+        @user = User.find(params[:user_id])
         if params[:query]
             @followers = @user.followers
-            render 'followers_index'
         else 
-            @following = @user.followings
-            render 'following_index'
+            @followers = @user.followings
         end
     end
 
     def create
         if !current_user.followings.include?(User.find(params[:user_id]))
-            @follows = Follow.create(follower_id: current_user.id, followed_user_id: User.find(params[:user_id]).id)
+            @follows = Follow.create(follower_id: current_user.id, followed_user_id: params[:user_id])
             if @follows.save
                 redirect_to user_path(params[:user_id])
             end

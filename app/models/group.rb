@@ -1,4 +1,7 @@
 class Group < ApplicationRecord
+    
+    belongs_to :mod, class_name: 'User'
+
     has_many :subscriptions
     has_many :subscribers, -> { Subscription.accepted },  class_name: "User", foreign_key: "user_id", through: :subscriptions
     has_many :posts

@@ -1,0 +1,12 @@
+<%= form_tag subscriptions_path do %>
+    <%= hidden_field_tag :'subscription[group_id]', current_group.id %>
+    <%= hidden_field_tag :'subscription[moderator]', false %>
+    <%= hidden_field_tag :'subscription[confirmed]', false %>
+    <% current_user.followers.each do |fllwr| %>
+        
+        <label> <%= fllwr.username %> </label>
+        <%= check_box_tag :'subscription[user_id]', fllwr.id %>
+        <br>
+    <% end %>
+    <%= submit_tag "Invite Members" %>
+<% end %>
