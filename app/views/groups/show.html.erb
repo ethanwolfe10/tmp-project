@@ -5,12 +5,14 @@
 <%= @group.bio %>
 
 Moderator: <%= link_to who_is_mod(current_group).username, user_path(who_is_mod(current_group)) %>
-<%= link_to "Confirmed Members", group_users_path(current_group), method: :get%>
+<%= link_to "Confirmed Members", group_users_path(current_group), method: :get %>
 
 <%= link_to "Create Post", new_group_post_path(current_group) %>
-<% current_group.posts.each do |post| %>
-    <%= post.title %>
-<% end %>
+<br>
+<br>
+<%= render partial: 'posts/post_details', collection: @group.posts, as: :post %>
+<br>
+
 <% if group_mod_check %>
     <p> yay </p>
 <% else %>

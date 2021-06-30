@@ -1,0 +1,9 @@
+<br>
+<%= link_to post.title, group_post_path(post) %> by <%= link_to post.user.display_name, user_path(post.user_id) %>
+<br>
+<%= post.content %>
+<br>
+<%= post.likes.count %> Likes
+<br>
+
+
