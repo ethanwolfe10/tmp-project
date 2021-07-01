@@ -10,8 +10,15 @@ class SubscriptionsController < ApplicationController
     def create
         @new_sub = Subscription.new(subscription_params)
         if @new_sub.save
-            redirect_to new_group_subscription_path
+            redirect_to new_group_subscription_path(@new_sub.group_id)
         end
+    end
+
+    def update
+        binding.pry
+        @sub = Subscription.find_by(user_id: current_user.id, group_id: params[:group_id])
+        @sub.update(confirmed: true)
+        redirect_to group_path(@sub.group_id)
     end
 
     def destroy        

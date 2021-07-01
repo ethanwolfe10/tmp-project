@@ -1,1 +1,7 @@
 <%= render partial: 'profile', locals: {user_profile: current_user} %>
+
+<br>
+
+<h1> Pending Invites </h1>
+
+<%= render partial: 'subscriptions/invite_index', collection: current_user.subscriptions, as: :sub %>
