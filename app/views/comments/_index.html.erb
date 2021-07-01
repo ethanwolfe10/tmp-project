@@ -1,3 +1,19 @@
-<% comments.each do |cmnt| %>
-    <%= render 'comment_details', cmnt: cmnt %>
+
+<% if collection.empty? %>
+    <p>
+        There Are No Comments Yet!
+        <%= button_to "Add First Comment", new_post_comment_path(@post), method: :get %>
+    </p>
+
+    <br>
+
+<% else %>
+    <%= button_to "Add New Comment", new_post_comment_path(@post), method: :get %>
+
+    <br>
+
+    <% collection.each do |cmnt| %>
+        <%= render 'comments/comment_details', cmnt: cmnt %>
+    <% end %>
+
 <% end %>

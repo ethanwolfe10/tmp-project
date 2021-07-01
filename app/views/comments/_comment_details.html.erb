@@ -1,6 +1,9 @@
 <div>
-    <%= cmnt.title %> by <%= cmnt.user.username %>
+    by <%= link_to cmnt.user.username, user_path(cmnt.user) %>
         <br>
         <%= cmnt.content %>
     <br>
+    <% if current_user.id == cmnt.post.user_id %>
+        <%= button_to "Delete Comment", post_comment_path(cmnt.post_id, cmnt), method: :delete %>
+    <% end %>
 </div>

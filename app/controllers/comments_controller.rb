@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
     def create
         @comment = Comment.new(comment_params)
         if @comment.save
-            redirect_to post_comment_path(@comment)
+            redirect_to post_path(@comment.post_id)
         end
     end
 
@@ -17,6 +17,10 @@ class CommentsController < ApplicationController
     end
 
     def destroy
+        if @comment.post.user == current_user
+            @comment.destroy
+            redirect_to group_post_path(@comment.post.group_id, @comment.post)
+        end
     end
 
     private
@@ -26,7 +30,7 @@ class CommentsController < ApplicationController
     end
 
     def comment_params
-        params.require(:comment).permit(:user_id, :post_id, :title, :content)
+        params.require(:comment).permit(:user_id, :post_id, :content)
     end
 
 end
