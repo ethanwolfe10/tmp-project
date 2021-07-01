@@ -4,6 +4,10 @@
     <br>
     Moderator: <%= link_to sub.group.mod.username, user_path(sub.group.mod) %>
     <br>
-    <%= button_to 'Click Here to Join', group_subscription_path(sub.group_id), method: :patch %>
+    <%= button_to 'Click Here to Join', group_subscription_path(sub.group_id, sub), method: :patch %>
+    <br>
+    OR:
+    <br>
+    <%= button_to 'Click Here to Decline Invite', group_subscription_path(sub.group_id, sub), method: :delete %>
     <br>
 <% end %>
