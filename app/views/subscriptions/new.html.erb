@@ -1,12 +1,26 @@
-<%= form_tag subscriptions_path do %>
-    <%= hidden_field_tag :'subscription[group_id]', current_group.id %>
-    <%= hidden_field_tag :'subscription[moderator]', false %>
-    <%= hidden_field_tag :'subscription[confirmed]', false %>
-    <% current_user.followers.each do |fllwr| %>
-        
-        <label> <%= fllwr.username %> </label>
-        <%= check_box_tag :'subscription[user_id]', fllwr.id %>
-        <br>
+<% if current_user.followers.empty? || no_eligible_members? %>
+
+    <p>
+        No Eligible Followers To Invite!
+    </p>
+
+<% else %>
+
+
+    <%= form_tag subscriptions_path do %>
+        <%= hidden_field_tag :'subscription[group_id]', current_group.id %>
+        <%= hidden_field_tag :'subscription[moderator]', false %>
+        <%= hidden_field_tag :'subscription[confirmed]', false %>
+
+        <% current_user.followers.each do |fllwr| %>
+            <% unless subscription_exist(fllwr) %>
+                <label> <%= fllwr.username %> </label>
+                <%= check_box_tag :'subscription[user_id]', fllwr.id %>
+                <br>
+            <% end %>
+        <% end %>
+
+        <%= submit_tag "Invite Members" %>
     <% end %>
-    <%= submit_tag "Invite Members" %>
+
 <% end %>
