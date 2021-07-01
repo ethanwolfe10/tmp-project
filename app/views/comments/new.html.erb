@@ -1,0 +1,17 @@
+<% form_tag post_comments_path do %>
+    <%= hidden_field_tag :'comment[user_id]', current_user.id %> 
+    <%= hidden_field_tag :'comment[post_id]', current_post.id %> 
+
+    <label> Comment Title: </label>
+    <%= text_field_tag :'comment[title]' %>
+
+    <br>
+
+    <label> Comment Content: </label>
+    <%= text_area_tag :'comment[content]' %>
+
+    <br>
+
+    <%= submit_tag "Add Comment" %>
+<% end %>
+
