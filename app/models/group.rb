@@ -11,6 +11,7 @@ class Group < ApplicationRecord
     validates :mod_id, presence: true
 
     after_create :create_first_subscriber
+    after_destroy :clear_house
 
 
 
@@ -18,6 +19,14 @@ class Group < ApplicationRecord
 
     def create_first_subscriber
         Subscription.create(user_id: mod_id, group_id: self.id, moderator: true, confirmed: true)
+    end
+
+    def clear_house
+        self.posts.each do |post|
+            post.comments.destroy_all
+            post.likes.destroy_all
+        end
+        self.subscriptions.destroy_all
     end
 
 end

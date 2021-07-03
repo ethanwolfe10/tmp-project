@@ -1,13 +1,14 @@
 class GroupsController < ApplicationController
 
-    before_action :set_group, only: [:show, :update, :destroy]
+    before_action :set_group, only: [:show, :edit, :update, :destroy]
+    before_action :permitted_user?, only: :show
+    before_action :permitted_moderator?, only: [:edit, :update, :destroy]
 
     def new
         @group = Group.new
     end
 
     def create
-        # binding.pry
         @group = Group.create(group_params)
         if @group.valid?
             @group.save
@@ -26,6 +27,8 @@ class GroupsController < ApplicationController
     def update
         if @group.update(group_params)
             redirect_to group_path(@group)
+        else
+            render :edit
         end
     end
 
@@ -40,6 +43,14 @@ class GroupsController < ApplicationController
 
     def set_group
         @group = Group.find(params[:id])
+    end
+
+    def permitted_moderator?
+        return true if @group.mod == current_user
+    end
+
+    def permitted_user?
+        Subscription.permitted_user(@group, current_user)
     end
 
     def group_params

@@ -11,9 +11,15 @@ class Subscription < ApplicationRecord
 
     private
 
+    def self.permitted_user(group, user)
+        return true if Subscription.find_by(group_id: group.id, user_id: user.id)
+    end
+
     def doesnt_already_exist
         if Subscription.exists?(user_id: self.user_id, group_id: self.group_id, )
             errors.add(:base, "User Already Has Pending Invitation")
+        else
+            return true
         end
     end
 
