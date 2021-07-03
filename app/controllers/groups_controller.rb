@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
 
-    before_action :set_group, only: [:show, :update, :update]
+    before_action :set_group, only: [:show, :update, :destroy]
 
     def new
         @group = Group.new
@@ -24,10 +24,16 @@ class GroupsController < ApplicationController
     end
 
     def update
+        if @group.update(group_params)
+            redirect_to group_path(@group)
+        end
     end
 
     def destroy
-        binding.pry
+        if @group.mod == current_user
+            @group.destroy
+            redirect_to user_path(current_user)
+        end
     end
 
     private

@@ -11,6 +11,8 @@
     <% else %>
         <%= button_to 'Like', post_likes_path(post, return_like(post, current_user)), method: :post %>
     <% end %>
+<% else %>
+    <%= link_to "Delete Post", group_post_path(post.group_id, post), method: :delete, data: { confirm: "Really?" } %>
 <% end %>
 <br>
 
