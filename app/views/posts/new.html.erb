@@ -1,13 +1,19 @@
 <%= form_tag group_posts_path do %>
+    <%= render partial: 'layouts/errors', collection: @post.errors, as: :model %>
     <%= hidden_field_tag :'post[user_id]', current_user.id %> 
-    <%= hidden_field_tag :'post[group_id]', params[:group_id] %> 
+    <%= hidden_field_tag :'post[group_id]', current_group.id %> 
 
-    <label>Post Title: </label>
-    <%= text_field_tag :'post[title]' %>
-    <br>
-    <label>Post Content: </label>
-    <%= text_field_tag :'post[content]' %>
-    <br>
+    <div class="field<%= ' field_with_errors' if @post.errors[:title].any? %>">
+        <label>Post Title: </label>
+        <%= text_field_tag :'post[title]' %>
+        <br>
+    </div>
+
+    <div class="field<%= ' field_with_errors' if @post.errors[:content].any? %>">
+        <label>Post Content: </label>
+        <%= text_field_tag :'post[content]' %>
+        <br>
+    </div>
     <%= submit_tag "Create Post" %>
 <% end %>
 

@@ -7,12 +7,12 @@ class Subscription < ApplicationRecord
     validates :user_id, presence: true
     validates :group_id, presence: true
     
-    after_validation :doesnt_already_exist
+    after_validation :doesnt_already_exist, on: [:create]
 
     private
 
     def doesnt_already_exist
-        if Subscription.exists?(user_id: self.user_id, group_id: self.group_id)
+        if Subscription.exists?(user_id: self.user_id, group_id: self.group_id, )
             errors.add(:base, "User Already Has Pending Invitation")
         end
     end

@@ -15,14 +15,12 @@ class SubscriptionsController < ApplicationController
     end
 
     def update
-        binding.pry
         @sub = Subscription.find_by(user_id: current_user.id, group_id: params[:group_id])
         @sub.update(confirmed: true)
         redirect_to group_path(@sub.group_id)
     end
 
-    def destroy
-        binding.pry        
+    def destroy      
         @sub = Subscription.find(params[:id])
         if @sub.user_id == current_user.id
             @sub.destroy
@@ -33,7 +31,6 @@ class SubscriptionsController < ApplicationController
     private
 
     def last_subscription
-        binding.pry
         if Group.find(params[:group_id]).subscribers.empty?
             Group.find(params[:group_id]).destroy
         else

@@ -1,11 +1,18 @@
 <%= form_tag groups_path do %>
+    <%= render partial: 'layouts/errors', collection: @group.errors, as: :model %>
     <%= hidden_field_tag :'group[mod_id]', current_user.id %> 
-    <label>Group Name: </label>
-    <%= text_field_tag :'group[name]' %>
-    <br>
     
-    <label>Group Bio: </label>
-    <%= text_field_tag :'group[bio]' %>
+    <div class="field<%= ' field_with_errors' if @group.errors[:name].any? %>">
+        <label>Group Name: </label>
+        <%= text_field_tag :'group[name]' %>
+        <br>
+    </div>
+    
+    <div class="field<%= ' field_with_errors' if @group.errors[:bio].any? %>">
+        <label>Group Bio: </label>
+        <%= text_field_tag :'group[bio]' %>
+        <br>
+    </div>
     <%= submit_tag "Submit"%>
 <% end %>
     

@@ -8,8 +8,11 @@ class CommentsController < ApplicationController
 
     def create
         @comment = Comment.new(comment_params)
-        if @comment.save
+        if @comment.valid?
+            @comment.save
             redirect_to post_path(@comment.post_id)
+        else
+            render :new
         end
     end
 

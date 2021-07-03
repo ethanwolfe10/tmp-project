@@ -1,13 +1,19 @@
+
+<%= render partial: 'posts/post_details', locals: { post: current_post } %>
+
 <%= form_tag post_comments_path do %>
+    <%= render partial: 'layouts/errors', collection: @comment.errors, as: :model %>
+
     <%= hidden_field_tag :'comment[user_id]', current_user.id %> 
     <%= hidden_field_tag :'comment[post_id]', current_post.id %> 
 
     <br>
-
-    <label> Comment Content: </label>
-    <%= text_area_tag :'comment[content]' %>
-
-    <br>
+    <div class="field<%= ' field_with_errors' if @comment.errors[:content].any? %>">
+        <label> Comment Content: </label>
+        <%= text_area_tag :'comment[content]' %>
+        <br>
+    </div>
+    
 
     <%= submit_tag "Add Comment" %>
 <% end %>

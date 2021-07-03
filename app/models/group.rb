@@ -6,7 +6,7 @@ class Group < ApplicationRecord
     has_many :subscribers, -> { Subscription.accepted },  class_name: "User", foreign_key: "user_id", through: :subscriptions
     has_many :posts
 
-    validates :name, presence: true, length: { in: 4..15 }
+    validates :name, uniqueness: true, presence: true, length: { in: 4..15 }, format: { without: /[0-9]/, message: "does not allow numbers" }
     validates :bio, length: { in: 1..50 }
     validates :mod_id, presence: true
 
