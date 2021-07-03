@@ -14,12 +14,9 @@ Rails.application.routes.draw do
 
   resources :subscriptions
 
-  resources :posts do 
-    resources :likes
-  end
-
   resources :posts, only: [:show] do
     resources :comments, only: [:show, :new, :create, :destroy]
+    resources :likes, only: [:index, :create, :destroy]
   end
 
   resources :groups
