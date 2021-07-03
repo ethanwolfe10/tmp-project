@@ -1,5 +1,16 @@
 <%= form_tag group_posts_path do %>
-    <%= render partial: 'layouts/errors', collection: @post.errors, as: :model %>
+    
+    <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2>There were some errors:</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
     <%= hidden_field_tag :'post[user_id]', current_user.id %> 
     <%= hidden_field_tag :'post[group_id]', current_group.id %> 
 

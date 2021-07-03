@@ -1,4 +1,4 @@
-<% if current_user.followers.empty? || no_eligible_members? %>
+<% if current_user.followers.empty? %>
 
     <p>
         No Eligible Followers To Invite!
@@ -13,14 +13,14 @@
         <%= hidden_field_tag :'subscription[confirmed]', false %>
 
         <% current_user.followers.each do |fllwr| %>
-            <% unless subscription_exist(fllwr) %>
+            <% unless subscription_exists(fllwr) %>
                 <label> <%= fllwr.username %> </label>
-                <%= check_box_tag :'subscription[user_id]', fllwr.id %>
+                <%= radio_button_tag :'subscription[user_id]', fllwr.id %>
                 <br>
             <% end %>
         <% end %>
 
-        <%= submit_tag "Invite Members" %>
+        <%= submit_tag "Invite Follower" %>
     <% end %>
 
 <% end %>
