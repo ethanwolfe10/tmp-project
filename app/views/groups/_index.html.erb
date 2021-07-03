@@ -10,6 +10,9 @@
                 <%= link_to user.username, user_path(user) %>
             <% end %>
         <% end %>
+        <% if current_user == group.mod %>
+            <%= link_to "Delete Group", group, method: :delete, data: { confirm: "Really?" } %>
+        <% end %>
     </div>
     <br>
 <% end %>

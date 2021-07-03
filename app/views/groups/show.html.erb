@@ -11,7 +11,7 @@ Moderator: <%= link_to @group.mod.username, user_path(@group.mod) %>
     <%= button_to 'Invite New Members', new_group_subscription_path(@group), method: :get %>
     <%= button_to 'Leave Group', subscription_path(current_sub(@group)), method: :delete %>
     <% if current_user == @group.mod %>
-    
+        <%= button_to "Edit Group", edit_group_path(@group), method: :get %>
     <% end %>
 <% end %>
 

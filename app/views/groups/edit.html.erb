@@ -1,0 +1,6 @@
+<%= form_for @group do |f| %>
+    <%= form_errors_for @group %>
+    <%= f.text_field :name %>
+    <%= f.text_area :bio %>
+    <%= f.submit %>
+<% end %>

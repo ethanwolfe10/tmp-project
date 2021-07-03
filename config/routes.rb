@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :groups
   resources :groups, only: [:show] do
     resources :users, only: [:index]
-    resources :posts, only: [:new, :show, :create]
+    resources :posts, only: [:new, :show, :edit, :update, :create, :destroy]
     resources :subscriptions, only: [:new, :create, :update, :destroy]
   end
 

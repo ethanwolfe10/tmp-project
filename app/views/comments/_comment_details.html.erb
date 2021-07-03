@@ -3,7 +3,7 @@
         <br>
         <%= cmnt.content %>
     <br>
-    <% if current_user.id == cmnt.post.user_id %>
-        <%= button_to "Delete Comment", post_comment_path(cmnt.post_id, cmnt), method: :delete %>
+    <% if current_user.id == cmnt.user_id %>
+        <%= button_to "Delete Comment", post_comment_path(cmnt.post_id, cmnt), method: :delete, data: { confirm: "Really?" } %>
     <% end %>
 </div>

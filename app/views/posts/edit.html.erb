@@ -1,5 +1,7 @@
-<%= form_for @post do |f| %>
+
+<%= form_for @post, url: group_post_path(@post.group, @post), method: :patch do |f| %>
+    <%= form_errors_for @post %>
     <%= f.text_field :title %>
     <%= f.text_area :content %>
-    <%= f.submit %>
+    <%= f.submit "Update Post" %>
 <% end %>
