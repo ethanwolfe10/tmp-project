@@ -9,8 +9,10 @@
   </div>
 
   <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username%>  Cannot Change Once Submitted
+    <%= f.label :username %>
+    <em> (Unchangable Once Submitted) </em>  <br />
+    <%= f.text_field :username, autocomplete: "username" %>
+    
   </div>
 
   <div class="field">

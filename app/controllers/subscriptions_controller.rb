@@ -1,26 +1,41 @@
 class SubscriptionsController < ApplicationController
 
     after_action :last_subscription, only: :destroy
+    before_action :set_sub, only: [:edit, :update]
+    
     
 
     def new
-        @subscription = Subscription.new
+        @sub = Subscription.new
     end
 
     def create
-        @new_sub = Subscription.new(subscription_params)
-        if @new_sub.save
-            redirect_to new_group_subscription_path(@new_sub.group_id)
+        
+        @new_sub = Subscription.create(subscription_params)
+        binding.pry
+        if @new_sub.valid?
+            binding.pry
+            @new_sub.save
+            redirect_to group_path(@new_sub.group_id)
         end
     end
 
+    def edit
+        
+    end
+
     def update
-        @sub = Subscription.find_by(user_id: current_user.id, group_id: params[:group_id])
-        @sub.update(confirmed: true)
+        if params[:query] 
+            @sub.update(confirmed: true)
+        else
+            @sub.update(status: params[:subscription][:status], status_color: params[:subscription][:status_color])
+            @sub.save
+        end
         redirect_to group_path(@sub.group_id)
     end
 
-    def destroy      
+    def destroy
+        binding.pry      
         @sub = Subscription.find(params[:id])
         if @sub.user_id == current_user.id
             @sub.destroy
@@ -38,7 +53,12 @@ class SubscriptionsController < ApplicationController
         end
     end
 
+    def set_sub
+        @sub = Subscription.find_by(user_id: current_user.id, group_id: params[:group_id])
+    end
+
     def subscription_params
+        binding.pry
         params.require(:subscription).permit(:user_id, :group_id, :moderator, :confirmed)
     end
 

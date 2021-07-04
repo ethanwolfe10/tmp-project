@@ -15,8 +15,8 @@ module SubscriptionsHelper
         end
     end
 
-    def current_sub(group)
-        Subscription.find_by(user_id: current_user.id, group_id: group.id)
+    def current_sub(group, user)
+        Subscription.find_by(user_id: user.id, group_id: group.id)
     end
 
 end

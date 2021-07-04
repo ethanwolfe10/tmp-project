@@ -16,12 +16,10 @@ class User < ApplicationRecord
   has_many :likes, through: :posts
   has_many :comments, through: :posts
 
-  validates :display_name, presence: true, length: { in: 4..20 }
-  validates :username, uniqueness: true, presence: true, length: { in: 4..20 }, format: { without: /\A[a-zA-Z0-9]+\z/, message: "does not allow special characters" }
+  validates :username, uniqueness: true, presence: true, length: { in: 4..20 }, format: { with: /\A[a-zA-Z0-9 ]+\z/, message: "does not allow special characters" }
   validates :email, uniqueness: true, presence: true
   
-  # after_validation :set_username
-  # validates :username, presence: true, uniqueness: true, length: { in 5..20 }
+  after_validation :set_username
   
 
   devise :database_authenticatable, :registerable,
@@ -41,9 +39,13 @@ class User < ApplicationRecord
     end
   end
 
+  def invites?
+    Subscription.where(user_id: self.id, confirmed: false)
+  end
+
   def set_username
-    binding.pry
-    self.display_name = "@#{self.username}"
+    self.display_name = self.username
+    self.username = "@#{self.username}"
   end
 
 end

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update] 
   resources :users, only: [:show, :showself] do
     resources :follows, only: [:index, :create, :destroy]
-    resources :subscriptions, only: [:index, :edit, :update]
+    resources :subscriptions, only: [:index, :destroy]
   end
 
   resources :subscriptions
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :groups, only: [:show] do
     resources :users, only: [:index]
     resources :posts, only: [:new, :show, :edit, :update, :create, :destroy]
-    resources :subscriptions, only: [:new, :create, :update, :destroy]
+    resources :subscriptions, only: [:new, :create, :edit, :update, :destroy]
   end
 
   

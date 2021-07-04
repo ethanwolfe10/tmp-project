@@ -6,21 +6,18 @@ class Subscription < ApplicationRecord
 
     validates :user_id, presence: true
     validates :group_id, presence: true
-    
-    after_validation :doesnt_already_exist, on: [:create]
+    validates :status_color, presence: false, length: {is: 7, message: "Not Hexadecimal" }
 
-    private
+    before_update :check_color_format
+    
+
+    def check_color_format
+        
+        errors.add(:status_color, "Not Hexadecimal" ) unless status_color.start_with?("#")
+    end
 
     def self.permitted_user(group, user)
         return true if Subscription.find_by(group_id: group.id, user_id: user.id)
-    end
-
-    def doesnt_already_exist
-        if Subscription.exists?(user_id: self.user_id, group_id: self.group_id, )
-            errors.add(:base, "User Already Has Pending Invitation")
-        else
-            return true
-        end
     end
 
 end

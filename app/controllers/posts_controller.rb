@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   before_action :set_post, only: [:show, :update, :edit, :destroy]
-  before_action :check_post_params, only: :create
+  before_action :check_user_params, only: :create
 
   def index
   end
@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create(post_params)
+    @post = Post.new(post_params)
     if @post.valid?
       @post.save
       redirect_to group_path(id: params[:group_id])
@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    
+    binding.pry
   end
 
   def edit
@@ -29,8 +29,9 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update(post_params)
-      @post.update(title: "EDITED: #{params[:post][:title]}", content: "EDITED: #{params[:post][:content]}")
+    if post_params
+      @post.update(title: "EDITED #{params[:post][:title]}", content: "EDITED #{params[:post][:content]}")
+      @post.save
       redirect_to group_post_path(@post)
     else
       render :edit
@@ -51,7 +52,11 @@ class PostsController < ApplicationController
   end
 
   def check_user_params
-    return true if Group.find(params[:group_id]).subscribers.include?(current_user)
+    if Group.find(params[:group_id]).valid_poster?(current_user)
+      return true 
+    else
+      redirect_to group_path(params[:group_id])
+    end
   end
 
   def post_params

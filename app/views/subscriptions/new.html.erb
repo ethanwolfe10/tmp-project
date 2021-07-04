@@ -8,6 +8,8 @@
 
 
     <%= form_tag subscriptions_path do %>
+        <%= render "devise/shared/error_messages", resource: @sub %>
+
         <%= hidden_field_tag :'subscription[group_id]', current_group.id %>
         <%= hidden_field_tag :'subscription[moderator]', false %>
         <%= hidden_field_tag :'subscription[confirmed]', false %>

@@ -19,6 +19,11 @@ class GroupsController < ApplicationController
     end
 
     def show
+        if !params[:filter].blank?
+            @posts = @group.filter_posts_by(params)
+        else
+            @posts = @group.posts
+        end
     end
 
     def edit
@@ -46,11 +51,20 @@ class GroupsController < ApplicationController
     end
 
     def permitted_moderator?
-        return true if @group.mod == current_user
+        if @group.mod != current_user
+            @group.errors.add(:mod, "Not Mod")
+            redirect_to group_path(@group)
+        else
+            return true
+        end
     end
 
     def permitted_user?
-        Subscription.permitted_user(@group, current_user)
+        if Subscription.permitted_user(@group, current_user) == nil
+            redirect_to user_path(current_user)
+        else
+            return true
+        end
     end
 
     def group_params

@@ -1,15 +1,6 @@
 <%= form_tag groups_path do %>
     
-    <% if @group.errors.any? %>
-    <div id="error_explanation">
-      <h2>There were some errors:</h2>
-      <ul>
-        <% @group.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-    <% end %>
+  <%= render "devise/shared/error_messages", resource: @group %>
 
     <%= hidden_field_tag :'group[mod_id]', current_user.id %> 
     

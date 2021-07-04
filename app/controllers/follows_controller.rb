@@ -1,11 +1,14 @@
 class FollowsController < ApplicationController
 
     def index
+        @all_users = User.all
         @user = User.find(params[:user_id])
         if params[:query]
             @followers = @user.followers
+            render 'followers_index'
         else 
-            @followers = @user.followings
+            @followings = @user.followings
+            render 'following_index'
         end
     end
 
@@ -13,7 +16,7 @@ class FollowsController < ApplicationController
         @follows = Follow.create(follower_id: current_user.id, followed_user_id: params[:user_id])
         if @follows.valid?
             @follows.save
-            redirect_to user_path(params[:user_id])
+            redirect_back(fallback_location: root_path)
         end
     end
 
@@ -21,7 +24,7 @@ class FollowsController < ApplicationController
         @follow = Follow.find(params[:id])
         if current_user.id == @follow.follower_id
             @follow.destroy
-            redirect_to user_path(params[:user_id])
+            redirect_back(fallback_location: root_path)
         end
     end
 

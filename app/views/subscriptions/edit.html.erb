@@ -1,0 +1,10 @@
+<%= form_for @sub, url: group_subscription_path(@sub.group_id, @sub), method: :patch do |f| %>
+    <%= render "devise/shared/error_messages", resource: @sub %>
+    <%= f.label "How are you feeling, today?" %>
+    <%= f.text_field :status %>
+    <br>
+    <%= f.label "Color in hexadecimal w/ hashtag (#ffffff)" %>
+    <%= f.text_field :status_color %>
+    <br>
+    <%= f.submit "Update Status" %>
+<% end %>

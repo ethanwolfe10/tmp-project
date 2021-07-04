@@ -1,5 +1,8 @@
 <br>
 <%= link_to post.title, group_post_path(post.group_id, post) %> by <%= link_to post.user.display_name, user_path(post.user_id) %>
+<div class="button" style="background-color:<%= current_sub(post.group, post.user).status_color %>;">
+     <%= current_sub(post.group, post.user).status %>
+</div>
 <br>
 <%= post.content %>
 <br>
