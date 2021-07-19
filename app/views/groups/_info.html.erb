@@ -1,0 +1,43 @@
+<div class="group_div">
+
+        <ul>
+
+            <b>Name: </b><lh><%= link_to group.name.upcase, group_path(group) %></lh>
+            <br>
+
+            <li> "<%= group.bio %>" </li>
+            <br>
+            
+            <b style="border-bottom: 2px solid red;">Moderator </b><li><%= link_to group.mod.username, user_path(group.mod) %></li>
+            <br>
+
+            <li>Members: </li>
+
+            <% if group.subscribers.size == 1 %>
+
+                <li style="text-align: center;">No Members</li>
+
+            <% else %>
+
+                <% group.subscribers.each do |user| %>
+                    <% unless user == group.mod %>
+                        <p><%= link_to user.username, user_path(user) %></p>
+                    <% end %>
+                <% end %>
+
+            <% end %>
+
+        </ul>
+        <br>
+
+        <% if current_user == group.mod %>
+            <p style="text-align: right; font-size: 12px;"><%= link_to "Delete Group", group, method: :delete, data: { confirm: "Really?" } %></p>
+        <% elsif ask_to_join?(current_user, group) %>
+            <%= form_tag subscriptions_path do %>
+                <%= hidden_field_tag :'subscription[user_id]', current_user.id %>
+                <%= render partial: 'subscriptions/hidden_values', locals: { group: group } %>
+            <% end %>   
+        <% end %>
+        
+    </div>
+    <br>

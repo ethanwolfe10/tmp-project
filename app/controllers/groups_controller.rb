@@ -1,8 +1,12 @@
 class GroupsController < ApplicationController
 
     before_action :set_group, only: [:show, :edit, :update, :destroy]
-    before_action :permitted_user?, only: :show
-    before_action :permitted_moderator?, only: [:edit, :update, :destroy]
+    before_action :permitted?, only: :show
+    before_action :moderator?, only: [:edit, :update, :destroy]
+
+    def index
+        @user = User.find(params[:user_id])
+    end
 
     def new
         @group = Group.new
@@ -12,9 +16,9 @@ class GroupsController < ApplicationController
         @group = Group.create(group_params)
         if @group.valid?
             @group.save
-            redirect_to group_path(@group)
+            redirect_to group_path(@group), flash: { notice: "Group Successfully Created" }
         else
-            render :new
+            redirect_to new_gorup_path
         end
     end
 
@@ -26,21 +30,26 @@ class GroupsController < ApplicationController
         end
     end
 
+    def most_subscribers
+        @group = Group.most_subscribers
+    end
+
     def edit
     end
 
     def update
         if @group.update(group_params)
-            redirect_to group_path(@group)
+            redirect_to group_path(@group), flash: { notice: "Group Successfully Updated" }
         else
-            render :edit
+            redirect_to group_path(@group), flash: { error: "Group Unsuccessfully Updated" }
         end
     end
 
     def destroy
-        if @group.mod == current_user
-            @group.destroy
-            redirect_to user_path(current_user)
+        if @group.destroy
+            redirect_to user_path(current_user), flash: { notice: "Group Successfully Deleted" }
+        else
+            redirect_to user_group_path(current_user), flash: { error: "Unsuccessful Deletion" }
         end
     end
 
@@ -50,20 +59,22 @@ class GroupsController < ApplicationController
         @group = Group.find(params[:id])
     end
 
-    def permitted_moderator?
-        if @group.mod != current_user
-            @group.errors.add(:mod, "Not Mod")
-            redirect_to group_path(@group)
-        else
+    def moderator?
+        if @group.moderator == current_user
             return true
+        else
+            @group.errors.add(:mod, "You're Not A Moderator")
+            redirect_to group_path(@group)
         end
     end
 
-    def permitted_user?
-        if Subscription.permitted_user(@group, current_user) == nil
-            redirect_to user_path(current_user)
-        else
+    def permitted?
+        binding.pry
+        if @group.subscribers.include?(current_user) || @group.invitees.include?(current_user)
             return true
+        else
+            @group.errors.add(:permitted, "You're Not Permitted")
+            redirect_to group_path(@group)
         end
     end
 

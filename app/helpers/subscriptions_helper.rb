@@ -1,9 +1,8 @@
 module SubscriptionsHelper
 
-    # def unconfirmed_subs(subs)
-    #     binding.pry
-    #     subs.where(confirmed: false)
-    # end
+    def status_check(user, group)
+        return false if Subscription.find_by(user_id: user.id, group_id: group.id)
+    end
 
     def subscription_exists(user)
         return true if Subscription.find_by(user_id: user.id, group_id: params[:group_id])
@@ -17,6 +16,10 @@ module SubscriptionsHelper
 
     def current_sub(group, user)
         Subscription.find_by(user_id: user.id, group_id: group.id)
+    end
+
+    def ask_to_join?(user, group)
+        return true if Subscription.find_by(user_id: user.id, group_id: group.id) == nil
     end
 
 end

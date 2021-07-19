@@ -10,11 +10,9 @@ class SubscriptionsController < ApplicationController
     end
 
     def create
-        
-        @new_sub = Subscription.create(subscription_params)
         binding.pry
+        @new_sub = Subscription.create(subscription_params)
         if @new_sub.valid?
-            binding.pry
             @new_sub.save
             redirect_to group_path(@new_sub.group_id)
         end
@@ -35,7 +33,6 @@ class SubscriptionsController < ApplicationController
     end
 
     def destroy
-        binding.pry      
         @sub = Subscription.find(params[:id])
         if @sub.user_id == current_user.id
             @sub.destroy
@@ -58,7 +55,6 @@ class SubscriptionsController < ApplicationController
     end
 
     def subscription_params
-        binding.pry
         params.require(:subscription).permit(:user_id, :group_id, :moderator, :confirmed)
     end
 

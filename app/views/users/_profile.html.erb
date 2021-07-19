@@ -1,5 +1,4 @@
-<h1>Profile Page</h1>
-<%= user_profile.display_name %>
+<h1 style="text-align: center;"><%= user_profile.display_name %>'s Page</h1>
 <%= user_profile.username %>
 <%= user_profile.bio %>
 <br>
@@ -8,25 +7,13 @@
 
 <% if user_profile != current_user %>
     <%= render 'follows/follow_button', user_profile: user_profile %>
+    <br>
+    <%= link_to "#{user_profile.display_name}'s Groups", user_groups_path(user_profile) %>
+<% else %>
+    <%= link_to "Edit Profile", edit_user_path %>    
 <% end %>
 <br>
 
-
-<% if user_profile == current_user %>
-    <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
-    <%= link_to "Edit Profile", edit_user_path %>
-    <br>
-
-    <%= link_to "Create New Group", new_group_path %>
-    <br>
-
-    
-<% end %>
-
-<h1> Joined Groups </h1>
-
-<%= render partial: 'groups/index', locals: {user_profile: user_profile} %>
-<br>
 
 
 

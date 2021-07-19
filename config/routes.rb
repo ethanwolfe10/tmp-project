@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :showself] do
     resources :follows, only: [:index, :create, :destroy]
     resources :subscriptions, only: [:index, :destroy]
+    resources :groups, only: :index
   end
 
   resources :subscriptions
@@ -19,7 +20,12 @@ Rails.application.routes.draw do
     resources :likes, only: [:index, :create, :destroy]
   end
 
+  namespace :groups do
+    get 'most_subscribers', to: 'groups#most_subscribers'
+  end
+
   resources :groups
+
   resources :groups, only: [:show] do
     resources :users, only: [:index]
     resources :posts, only: [:new, :show, :edit, :update, :create, :destroy]

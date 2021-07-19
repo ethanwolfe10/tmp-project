@@ -1,5 +1,5 @@
+<h2> Invitations </h2>
 
-<% unless sub.confirmed == true %>
     <%= link_to sub.group.name, group_path(sub.group_id) %> 
     <br>
     Moderator: <%= link_to sub.group.mod.username, user_path(sub.group.mod) %>
@@ -10,4 +10,4 @@
     <br>
     <%= button_to 'Click Here to Decline Invite', group_subscription_path(sub.group_id, sub), method: :delete %>
     <br>
-<% end %>
+

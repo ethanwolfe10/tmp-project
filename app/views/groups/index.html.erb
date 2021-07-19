@@ -1,0 +1,26 @@
+<h1 style="text-align: center;"><%= @user.display_name%>'s Groups: </h1>
+<br>
+<br>
+
+<%= render "devise/shared/error_messages", resource: @user %>
+<p id="error"><%= flash[:error] %></p>
+<p id="notice"><%= flash[:notice] %></p>
+
+<% if @user.groups.empty? %>
+    <p> <%= @user.display_name %> Doesn't Belong to any Groups! </p>
+<% else %>
+    <%= render partial: 'info', collection: @user.groups, as: :group || "You Don't Belong to any Groups!" %>
+<% end %>
+    <br>
+
+<% if current_user == @user %>
+    <%= link_to "Create New Group", new_group_path %>
+
+    <% if @user.subscriptions.invited.empty? %>
+        <h4 style="color: red; text-align: center;">Your Pending Group Invites Would Appear Here </h4>
+    <% else %>
+        <%= render partial: "subscriptions/invite_index", collection: @user.subscriptions.invited, as: :sub || "No Pending Invites" %>
+    <% end %>
+<% end %>
+
+

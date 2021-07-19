@@ -1,22 +1,23 @@
+<h1 style="text-align: center;"> <%= @group.name %> </h1>
 
+<br> 
 
-<br>
-<br>
-<br>
-<%= @group.name %>
-<%= @group.bio %>
+<p style="text-align: center;">
+    "<%= @group.bio %>"
+</p>
+
+<br> 
 
 <%= render "devise/shared/error_messages", resource: @group %>
 
 Moderator: <%= link_to @group.mod.username, user_path(@group.mod) %>
 <%= link_to "Confirmed Members", group_users_path(@group), method: :get %>
 
-<% if confirmed_member(@group) %>
+<% if @group.subscribers.include?(current_user) %>
 
-    <%= button_to 'Invite New Members', new_group_subscription_path(@group), method: :get %>
-    <%= button_to 'Leave Group', subscription_path(current_sub(@group, current_user)), method: :delete %>
+    <%= render partial: 'layouts/gnavbar' %>
 
-    <% if !current_sub(@group, current_user).status.blank? %>
+    <% if status_check(current_user, @group) %>
 
         You're Feeling: 
             
@@ -26,27 +27,29 @@ Moderator: <%= link_to @group.mod.username, user_path(@group.mod) %>
 
     <% end %>
 
-    <%= button_to 'Change Your Status', edit_group_subscription_path(@group, current_sub(@group, current_user)), method: :get %>
-
-    <% if current_user == @group.mod %>
-        <%= button_to "Edit Group", edit_group_path(@group), method: :get %>
-    <% end %>
-
 <% end %>
-
-
 
 <%= link_to "Create Post", new_group_post_path(@group) %>
+
 <br>
 <br>
-<div>
-  <h3>Filter posts:</h3>
-  <%= form_tag group_path(@group), method: :get do %>
-    <%= select_tag "filter", options_for_select(["Most Likes", "Most Comments", "Recent Posts", "Old Posts"]), include_blank: true %>
-    <%= submit_tag "Filter" %>
-  <% end %>
-</div>
-<% if @posts && !@posts.empty? %>
-    <%= render partial: 'posts/post_details', collection: @posts, as: :post %>
+
+<% if @posts %>
+    <% if @posts.empty? %>
+        <p> There Are No Posts Yet! </p>
+    <% else %>
+        <div>
+
+            <h3>Filter posts:</h3>
+            
+            <%= form_tag group_path(@group), method: :get do %>
+                <%= select_tag "filter", options_for_select(["Most Likes", "Most Comments", "Recent Posts", "Old Posts"]), include_blank: true %>
+                <%= submit_tag "Filter" %>
+            <% end %>
+
+        </div>
+
+        <%= render partial: 'posts/post_details', collection: @posts, as: :post || "There Are No Posts Yet!" %>
+    <% end %>
 <% end %>
-<br>
+
