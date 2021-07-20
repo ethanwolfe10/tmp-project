@@ -32,6 +32,7 @@ class GroupsController < ApplicationController
 
     def most_subscribers
         @group = Group.most_subscribers
+        binding.pry
     end
 
     def edit
@@ -69,12 +70,10 @@ class GroupsController < ApplicationController
     end
 
     def permitted?
-        binding.pry
         if @group.subscribers.include?(current_user) || @group.invitees.include?(current_user)
             return true
         else
-            @group.errors.add(:permitted, "You're Not Permitted")
-            redirect_to group_path(@group)
+            redirect_to user_path(current_user), flash: { error: "You're Not Permitted"}
         end
     end
 

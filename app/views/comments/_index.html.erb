@@ -1,4 +1,3 @@
-
 <% if collection.empty? %>
     <p>
         There Are No Comments Yet!
@@ -14,6 +13,7 @@
 
     <% collection.each do |cmnt| %>
         <%= render 'comments/comment_details', cmnt: cmnt %>
+        <br>
     <% end %>
 
 <% end %>

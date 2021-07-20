@@ -2,34 +2,38 @@ class SubscriptionsController < ApplicationController
 
     after_action :last_subscription, only: :destroy
     before_action :set_sub, only: [:edit, :update]
-    
-    
 
     def new
         @sub = Subscription.new
     end
 
     def create
-        binding.pry
         @new_sub = Subscription.create(subscription_params)
         if @new_sub.valid?
             @new_sub.save
-            redirect_to group_path(@new_sub.group_id)
+            redirect_to group_path(@new_sub.group_id), flash: { notice: "Subscription Created Successfully"}
         end
     end
 
-    def edit
-        
+    def edit     
     end
 
     def update
+        binding.pry
         if params[:query] 
             @sub.update(confirmed: true)
+            notice = "Group Joined Successfully"
         else
+            binding.pry
             @sub.update(status: params[:subscription][:status], status_color: params[:subscription][:status_color])
-            @sub.save
+            if @sub.valid?
+                @sub.save
+            else
+                redirect_to group_path(@sub.group)
+            end
+            notice = "Status Changed Successfully"
         end
-        redirect_to group_path(@sub.group_id)
+        redirect_to group_path(@sub.group_id), flash: { notice: notice }
     end
 
     def destroy

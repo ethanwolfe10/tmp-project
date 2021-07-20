@@ -9,12 +9,11 @@ class Subscription < ApplicationRecord
     validates :user_id, presence: true
     validates :group_id, presence: true
     validates :status_color, presence: false, length: {is: 7, message: "Not Hexadecimal" }
-
     before_update :check_color_format
     
 
     def check_color_format
-        
+        binding.pry
         errors.add(:status_color, "Not Hexadecimal" ) unless status_color.start_with?("#")
     end
 

@@ -1,9 +1,11 @@
-<div>
-    by <%= link_to cmnt.user.username, user_path(cmnt.user) %>
-        <br>
-        <%= cmnt.content %>
+<div class="comment">
+        by: <%= link_to cmnt.user.username, user_path(cmnt.user) %> <%= render partial: 'users/status', locals: { group: cmnt.post.group } %>
     <br>
+    <br>
+    <p>
+        <%= cmnt.content %>
+    </p>
     <% if current_user.id == cmnt.user_id %>
-        <%= button_to "Delete Comment", post_comment_path(cmnt.post_id, cmnt), method: :delete, data: { confirm: "Really?" } %>
+        <%= button_to "Delete Comment", post_comment_path(cmnt.post, cmnt), method: :delete, data: { confirm: "Really?" } %>
     <% end %>
 </div>

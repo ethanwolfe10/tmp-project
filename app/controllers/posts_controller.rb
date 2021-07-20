@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
 
   before_action :set_post, only: [:show, :update, :edit, :destroy]
-  before_action :check_user_params, only: :create
+  before_action :can_post?, only: :create
+  before_action :can_view?, only: :show
 
   def index
   end
@@ -21,11 +22,9 @@ class PostsController < ApplicationController
   end
 
   def show
-    binding.pry
   end
 
   def edit
-    
   end
 
   def update
@@ -51,11 +50,19 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  def check_user_params
+  def can_view?
+    if @post.group.subscribers.include?(current_user) || @post.group.invitees.include?(current_user)
+      return true
+    else
+      redirect_to user_path(current_user), flash: { notice: "Cannot View Post" }
+    end
+  end
+
+  def can_post?
     if Group.find(params[:group_id]).valid_poster?(current_user)
       return true 
     else
-      redirect_to group_path(params[:group_id])
+      redirect_to group_path(params[:group_id]), flash: { notice: "Cannot Post" }
     end
   end
 

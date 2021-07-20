@@ -1,12 +1,12 @@
 
-<%= render partial: 'posts/post_details', locals: { post: current_post } %>
+<%= render partial: 'posts/post_details', locals: { post: @post } %>
 
 <%= form_tag post_comments_path do %>
     
   <%= render "devise/shared/error_messages", resource: @comment %>
 
     <%= hidden_field_tag :'comment[user_id]', current_user.id %> 
-    <%= hidden_field_tag :'comment[post_id]', current_post.id %> 
+    <%= hidden_field_tag :'comment[post_id]', @post.id %> 
 
     <br>
     <div class="field<%= ' field_with_errors' if @comment.errors[:content].any? %>">

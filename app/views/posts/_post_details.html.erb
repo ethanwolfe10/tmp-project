@@ -1,25 +1,40 @@
 <br>
-<%= link_to post.title, group_post_path(post.group_id, post) %> by <%= link_to post.user.display_name, user_path(post.user_id) %>
-<div class="button" style="background-color:<%= current_sub(post.group, post.user).status_color %>;">
-     <%= current_sub(post.group, post.user).status %>
-</div>
-<br>
-<%= post.content %>
-<br>
-<%= post.likes.count %> <%= link_to "Likes", post_likes_path(post), method: :get %>
+<div class="container">
+    <div class="post_div">
 
-<% if current_user.id != post.user_id %>
-    <% if post.group.subscribers.include?(current_user) %>
-        <% if already_liked?(post, current_user) %>
-            <%= button_to 'Unlike', post_like_path(post, return_like(post, current_user)), method: :delete %>
-        <% else %>
-            <%= button_to 'Like', post_likes_path(post, return_like(post, current_user)), method: :post %>
-        <% end %>
-    <% end %>
-<% else %>
-    <%= link_to "Edit Post", edit_group_post_path(post.group_id, post) %>
-    <%= link_to "Delete Post", group_post_path(post.group_id, post), method: :delete, data: { confirm: "Really?" } %>
-<% end %>
+        <div class="post_div_title">
+            <h1><%= link_to post.title, group_post_path(post.group, post) %></h1>
+            <p>
+                By: <%= link_to post.user.display_name, user_path(post.user_id) %> || <%= render partial: 'users/status', locals: { group: post.group } %>
+            </p>
+        </div>
+
+        <br>
+
+        <div class="post_div_body">
+            <p><%= post.content %></p>
+        </div>
+
+        <br>
+        <br>
+
+            
+            <% if current_user.id != post.user_id %>
+                <% if post.group.subscribers.include?(current_user) %>
+                    <p class="post_likes">
+                        <%= post.likes.count %> <%= link_to "Likes", post_likes_path(post), method: :get %>  || <%= render partial: "likes/like_button", locals: { post: post } %>
+                    </p>
+                <% end %>
+                
+               
+            <% else %>
+                <%= link_to "Edit Post", edit_group_post_path(post.group_id, post) %>
+                <%= link_to "Delete Post", group_post_path(post.group_id, post), method: :delete, data: { confirm: "Really?" } %>
+            <% end %>
+
+        
+    </div>
+</div>
 <br>
 
 

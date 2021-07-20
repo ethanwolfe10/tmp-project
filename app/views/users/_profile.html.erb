@@ -1,17 +1,7 @@
-<h1 style="text-align: center;"><%= user_profile.display_name %>'s Page</h1>
-<%= user_profile.username %>
-<%= user_profile.bio %>
-<br>
-<%= user_profile.followers.count %> <%= link_to 'Followers', user_follows_path(user_profile, :query => 'followers') %> |
-<%= user_profile.followings.count %> <%= link_to 'Following', user_follows_path(user_profile) %>
 
-<% if user_profile != current_user %>
-    <%= render 'follows/follow_button', user_profile: user_profile %>
-    <br>
-    <%= link_to "#{user_profile.display_name}'s Groups", user_groups_path(user_profile) %>
-<% else %>
-    <%= link_to "Edit Profile", edit_user_path %>    
-<% end %>
+<%= render 'user_details', user_profile: user_profile %>
+
+
 <br>
 
 

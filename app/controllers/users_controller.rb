@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-    
     before_action :set_user, only: [:show, :edit, :update]
+    before_action :set_username, only: :show
 
     def index
         
@@ -18,14 +18,24 @@ class UsersController < ApplicationController
     end
 
     def update
+        binding.pry
         if @user.update(user_params)
+            @user.save
+            binding.pry
             redirect_to user_path
         else
-            #redirect back with error
+            redirect_to edit_user_path(current_user), flash: { error: "Update Unsuccessful" }
         end
     end
 
     private
+
+    def set_username
+        if @user.display_name == nil
+            @user.display_name = @user.username
+            @user.save
+        end
+    end
 
     def set_user
         @user = User.find(params[:id])

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   namespace :groups do
-    get 'most_subscribers', to: 'groups#most_subscribers'
+    get 'most_subscribers', to: 'most_subscribers'
   end
 
   resources :groups

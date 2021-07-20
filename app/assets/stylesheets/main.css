@@ -30,18 +30,230 @@
       width: 85%;
     }
   
+    .notice p {
+      text-align: center;
+      color: green;
+    }
 
+    .error p {
+      text-align: center;
+      color: red;
+    }
   
-    .group_div {
-      width: 55%;
-      margin: 2px auto;
-      margin-left: 200px;
-      margin-right: 200px;
+    .post_div {
+      background-color: rgb(203, 117, 236);
+      margin: auto;
+      -moz-box-shadow: 0 0 10px rgba(36, 156, 212, 0.3);
+      -webkit-box-shadow: 0 0 10px rgba(36, 156, 212, 0.3);
+      box-shadow: 0 0 20px rgba(36, 156, 212, 0.3);
+      padding: 1.5%;
+      border-radius: 25px;
+    }
+
+    .comment {
+      width: 50%;
+      background-color: rgb(68, 178, 211);
+      margin: auto;
+      border-radius: 25px;
+      padding: 1.5%;
+      text-align: right;
+      font-size: 16px;
+    }
+
+    .comment p {
       text-align: left;
+      font-size: 16px;
+      color:rgb(236, 232, 172);
+      margin-left: 10px;
+    }
+
+    .like_form {
+      display: inline-block;
+      font-size: 12px;
+      margin-left: 5px;
+    }
+
+    .post_likes {
+      display: inline-block;
+      text-align: right;
+      padding: 1.5%;
+      margin: 0px auto;
+      margin-left: 10px;
+    }
+
+    .post_div_title {
+      width: 95%;
+      height: 5%;
+      margin: 0px auto;
+    }
+
+    .post_div_title h1 {
+      font-style: bold;
+      font-size: 20px;
+      text-align: left;
+      border-bottom: 0px;
+    }
+
+    .post_div_title p {
+      padding: 0%;
+      margin: 0px auto;
+      display: inline-block;
+      text-align: left;
+      font-style: italic;
+      font-size: 18px
+    }
+
+    .post_div_body {
+      width: 95%;
+      height: 5%;
+      margin: 0px auto;
+      float: left;
+    }
+
+    .post_div_body p {
+      font-family:'Times New Roman', Times, serif;
+      text-align: center;
+      color:rgb(236, 232, 172);
+      margin-right: 10px;
+      font-size: 18px;
+    }
+
+    .group_div {
+      width: 95%;
+      text-align: left;
+      margin: auto;
       -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
       -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
       box-shadow: 0 0 10px rgba(0,0,0,.3);
       padding: 1.25%;
+      border-radius: 25px;
+    }
+
+    .joined_groups {
+      overflow:hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,.3);
+      background-color: rgb(68, 178, 211);
+      padding: 1.25%;
+      border-radius: 25px;
+    }
+
+    .joined_groups h2 {
+      box-shadow: 0 0 10px rgba(0,0,0,.3);
+      width: 20%;
+      text-align: center;
+      background-color:rgb(255, 166, 0);
+      padding: 1.25%;
+      border-radius: 25px;
+      color: rgb(68, 178, 211);
+    }
+
+    .invitations {
+      overflow:hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,.3);
+      background-color: rgb(68, 178, 211);
+      padding: 1.25%;
+      border-radius: 25px;
+    }
+
+    .invitations h2 {
+      box-shadow: 0 0 10px rgba(0,0,0,.3);
+      width: 18%;
+      text-align: center;
+      background-color:rgb(253, 255, 142);
+      padding: 1.25%;
+      border-radius: 25px;
+      color: rgb(68, 178, 211);
+    }
+
+    .group_inv {
+      overflow:hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,.3);
+      padding: 1.25%;
+      border-radius: 25px;
+      margin: auto;
+      background-color: rgb(253, 255, 142);
+    }
+
+    .group_inv2 {
+      overflow:hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,.3);
+      padding: 1.25%;
+      border-radius: 25px;
+      margin: auto;
+      background-color: rgb(255, 166, 0);
+    }
+
+    .title_link {
+      text-align: center;
+      margin: 4px auto;
+      padding: 1.25%;
+      border-radius: 25px;
+    }
+
+    .title_link a {
+      padding: 1.5%;
+      border-radius: 25px;
+      background-color: rgb(68, 178, 211);
+      width: 25%;
+      color: rgb(253, 255, 142);
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .title_link2 {
+      text-align: center;
+      margin: 4px auto;
+      padding: 1.25%;
+      border-radius: 25px;
+    }
+
+    .title_link2 a {
+      padding: 1.5%;
+      border-radius: 25px;
+      background-color: rgb(68, 178, 211);
+      width: 25%;
+      color:  rgb(255, 166, 0);
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .group_info {
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,.3);
+      padding: 1.25%;
+      width: 75%;
+      height: 75%;
+      border-radius: 25px;
+      background-color: rgb(68, 178, 211);
+      overflow:hidden;
+    }
+
+    .group_info2 {
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,.3);
+      padding: 1.25%;
+      width: 75%;
+      height: 75%;
+      border-radius: 25px;
+      background-color: rgb(219, 142, 255);
+      overflow:hidden;
+    }
+
+    .group_info p {
+      margin: 5px auto;
+    }
+
+    .join_button {
+      margin: 15px auto;
+      position: relative;
+      text-align: center;
+      display: inline;
+    }
+
+    .spacer {
+      clear:both;
+      border:none;
+      width:100%;
     }
   
     h1 {
@@ -52,14 +264,133 @@
     }
 
     .gnavbar {
-        overflow: hidden;
+      overflow: hidden;
       background-color: rgb(32, 210, 216);
       position: absolute;
+      margin: 1px auto;
+    }
+
+    .fllw_bttn {
+      display: inline;
+      text-align: center;
+    }
+
+    .user_details {
+      background-color: rgb(233, 177, 255);
+      border-radius: 25px;
+      padding: 1.25%;
+      width: 55%;
+      height: 100%;
+      margin: auto;
+      position: relative;
+      text-align: center;
+    }
+
+    .user_details h3 {
+      border-bottom: 0px;
+      padding: 5px;
+      border-radius: 25px;
+      background-color: antiquewhite;
+      width: 35%;
+      font-size: 24px;
+      text-align: center;
+      margin: auto;
+    }
+
+    .user_details a {
+      color:  rgb(203, 117, 236);
+      text-align: center;
+    }
+
+    .user_details p {
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      display: inline-block;
+      margin:auto;
+    }
+
+    .follow_link {
+      padding: 8px;
+      border-radius: 25px;
+      background-color: antiquewhite;
+      display: inline-block;
+    }
+
+    .user_bio {
+      padding: 8px;
+      border-radius: 25px;
+      width: 50%;
+      height: 25%;
+      background-color: antiquewhite;
+      margin: 5px auto;
+      font-size: 18px;
+    }
+
+    .user_edit_div {
+      border-radius: 25px;
+      background-color: rgb(233, 177, 255);
+      padding: 1.25%;
+      width: 80%;
+      height: 100%;
+      margin: auto;
+    }
+
+    .user_edit_div h2 {
+      border-bottom: 0px;
+      padding: 5px;
+      border-radius: 25px;
+      background-color: antiquewhite;
+      width: 25%;
+      color:  rgb(203, 117, 236);
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .user_edit_form {
+      border-radius: 25px;
+      background-color: antiquewhite;
+      padding: 3.5%;
+      width: 80%;
+      height: 100%;
+      margin: 5px auto;
+      border: 5px transparent;
+    }
+
+    .user_edit_form label {
+      font-style: bold;
+      font-size: 18px;
+      border-bottom: 0px;
+      padding: 1.2%;
+      border-radius: 25px;
+      color: antiquewhite;
+      width: 25%;
+      background-color:  rgb(203, 117, 236);
+      text-align: center;
+      margin:auto;
+    }
+
+    .edit_submit  {
+      float: right;
+      position: relative;
+    }
+
+    .follow_title {
+      font-style: bold;
+      font-size: 18px;
+      border-bottom: 0px;
+      padding: 1.2%;
+      border-radius: 25px;
+      background-color: antiquewhite;
+      width: 25%;
+      color:  rgb(203, 117, 236);
+      text-align: center;
+      margin:auto;
     }
 
     .gnavbar li {
         float: left;
-        color: rgb(224, 207, 55);
+        color: rgb(253, 255, 142);
         text-align: center;
         padding: 8px 10px;
         text-decoration: none;
@@ -67,7 +398,7 @@
     
     .gnavbar li:hover {
         background-color: cornflowerblue;
-        color: rgb(224, 207, 55);
+        color: rgb(253, 255, 142);
     }
   
     .navbar {
@@ -116,6 +447,13 @@
     .content {
       float: left;
       width: 60%; /* 480px / 800px */
+    }
+
+    .container {
+      overflow: hidden;
+      position: relative;
+      margin: 5px auto;
+      border-bottom: 0px;
     }
   
     .sidebar {

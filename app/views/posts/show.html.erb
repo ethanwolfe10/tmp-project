@@ -2,9 +2,6 @@
 <%= render 'post_details', post: @post %>
 
 <br>
-
-
-<br>
-<%= render 'comments/index', collection: @post.comments, object: @post %>
+<%= render 'comments/index', collection: @post.comments %>
 
 

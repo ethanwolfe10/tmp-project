@@ -1,13 +1,14 @@
 <div class="gnavbar" style="position: relative;">
         <nav>
             <ul>
-                <li><%= button_to 'Invite New Members', new_group_subscription_path(@group), method: :get %></li>
-                <li><%= button_to 'Leave Group', subscription_path(current_sub(@group, current_user)), method: :delete %></li>
-                <li><%= button_to "Create Post", new_group_post_path(@group), method: :get %></li>
-                <li><%= button_to 'Change Your Status', edit_group_subscription_path(@group, current_sub(@group, current_user)), method: :get %></li>
-                <% if current_user == @group.mod %>
-                    <li><%= button_to "Edit Group", edit_group_path(@group), method: :get %></li>
+                <li><%= button_to 'Invite New Members', new_group_subscription_path(group), method: :get %></li>
+                <li><%= button_to 'Leave Group', subscription_path(current_sub(group, current_user)), method: :delete %></li>
+                <li><%= button_to "Create Post", new_group_post_path(group), method: :get %></li>
+                <% if current_user == group.mod %>
+                    <li><%= button_to "Edit Group", edit_group_path(group), method: :get %></li>
                 <% end %>
+                <li><%= button_to 'Change Your Status', edit_group_subscription_path(group, current_sub(group, current_user)), method: :get %></li>
             </ul>        
         </nav>
     </div>
+    <br>

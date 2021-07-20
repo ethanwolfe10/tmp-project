@@ -1,7 +1,11 @@
 <% if !@followings.blank? %>
     <%= render partial: 'users/user_details', collection: @followings, as: :user_profile %>
 <% else %>
-    Here's Users to Follow: 
+    <h2 class="follow_title">
+        Here are Users to Follow:
+    </h2>
+    
+    <br>
 
     <%= render partial: 'users/user_details', collection: unfollowed_users(current_user), as: :user_profile %>
 <% end %>

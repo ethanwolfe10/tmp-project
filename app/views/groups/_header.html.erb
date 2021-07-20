@@ -1,0 +1,13 @@
+<h1 style="text-align: center;"> <%= group.name %> </h1>
+
+<br> 
+
+<p style="text-align: center;">
+    "<%= group.bio %>"
+</p>
+
+<br>
+
+<%= render "layouts/gnavbar", group: group %>
+
+<%= render "devise/shared/error_messages", resource: group %>

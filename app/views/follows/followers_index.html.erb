@@ -1,5 +1,6 @@
 <% if !@followers.blank? %>
     <%= render partial: 'users/user_details', collection: @followers, as: :user_profile %>
 <% else %>
-    No Followers!
+    <br>
+    <p style="text-align: center;">No Followers!</p>
 <% end %>

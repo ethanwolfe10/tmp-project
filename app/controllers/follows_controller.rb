@@ -1,7 +1,6 @@
 class FollowsController < ApplicationController
 
     def index
-        @all_users = User.all
         @user = User.find(params[:user_id])
         if params[:query]
             @followers = @user.followers
@@ -13,9 +12,10 @@ class FollowsController < ApplicationController
     end
 
     def create
-        @follows = Follow.create(follower_id: current_user.id, followed_user_id: params[:user_id])
+        @follows = Follow.create(follow_params)
         if @follows.valid?
             @follows.save
+            flash[:notice] = "Followed User"
             redirect_back(fallback_location: root_path)
         end
     end
@@ -24,8 +24,15 @@ class FollowsController < ApplicationController
         @follow = Follow.find(params[:id])
         if current_user.id == @follow.follower_id
             @follow.destroy
+            flash[:notice] = "Unfollowed User"
             redirect_back(fallback_location: root_path)
         end
+    end
+
+    private
+
+    def follow_params
+        params.require(:follow).permit(:follower_id, :followed_user_id)
     end
 
 end

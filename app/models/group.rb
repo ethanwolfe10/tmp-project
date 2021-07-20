@@ -51,7 +51,7 @@ class Group < ApplicationRecord
     end
 
     def self.most_subscribers
-        Group.order("groups.subscribers DESC").first 
+        Group.order("subscribers_count DESC").first 
     end
     
 

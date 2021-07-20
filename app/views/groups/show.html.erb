@@ -1,46 +1,20 @@
-<h1 style="text-align: center;"> <%= @group.name %> </h1>
+<%= render 'header', group: @group %>
 
-<br> 
-
-<p style="text-align: center;">
-    "<%= @group.bio %>"
-</p>
-
-<br> 
-
-<%= render "devise/shared/error_messages", resource: @group %>
-
-Moderator: <%= link_to @group.mod.username, user_path(@group.mod) %>
-<%= link_to "Confirmed Members", group_users_path(@group), method: :get %>
-
-<% if @group.subscribers.include?(current_user) %>
-
-    <%= render partial: 'layouts/gnavbar' %>
-
-    <% if status_check(current_user, @group) %>
-
-        You're Feeling: 
-            
-            <div class="button" style="background-color:<%= current_sub(@group, current_user).status_color %>;">
-                <%= current_sub(@group, current_user).status %>
-            </div>
-
-    <% end %>
-
-<% end %>
-
-<%= link_to "Create Post", new_group_post_path(@group) %>
-
+<b>Moderator: </b><%= link_to @group.mod.username, user_path(@group.mod) %>
 <br>
+<br>
+
+<%= button_to "Confirmed Members", group_users_path(@group), method: :get %>
+
 <br>
 
 <% if @posts %>
     <% if @posts.empty? %>
         <p> There Are No Posts Yet! </p>
     <% else %>
-        <div>
+        <div style="text-align:center;">
 
-            <h3>Filter posts:</h3>
+            <h3 >Filter posts:</h3>
             
             <%= form_tag group_path(@group), method: :get do %>
                 <%= select_tag "filter", options_for_select(["Most Likes", "Most Comments", "Recent Posts", "Old Posts"]), include_blank: true %>

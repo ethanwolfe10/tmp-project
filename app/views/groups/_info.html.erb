@@ -1,10 +1,7 @@
-<div class="group_div">
-
+<div class="group_inv2">
+        <h3 class="title_link2"><%= link_to group.name.upcase, group_path(group) %></h3>
         <ul>
-
-            <b>Name: </b><lh><%= link_to group.name.upcase, group_path(group) %></lh>
-            <br>
-
+        <div class="group_info">
             <li> "<%= group.bio %>" </li>
             <br>
             
@@ -26,7 +23,7 @@
                 <% end %>
 
             <% end %>
-
+        </div>
         </ul>
         <br>
 

@@ -7,4 +7,8 @@ module GroupsHelper
     def current_group
         Group.find(params[:group_id])
     end
+
+    def in_a_group?
+        return true if params[:group_id]
+    end
 end

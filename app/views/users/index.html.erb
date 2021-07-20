@@ -1,7 +1,2 @@
-<% current_group.subscribers.each do |user| %>
-    <div>
-        <%= link_to user.username, user_path(user) %>
-        <%= user.bio %>
-        <br>
-    </div>
-<% end %>
+<%= render 'groups/header', group: current_group %>
+<%= render partial: 'user_details', collection: current_group.subscribers, as: :user_profile %>

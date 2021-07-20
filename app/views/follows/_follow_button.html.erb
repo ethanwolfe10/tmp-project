@@ -1,8 +1,12 @@
-<% if user_profile != current_user %>
-    
-    <% if current_user.followings.include?(user_profile) %>
-        <%= button_to "Unfollow", user_follow_path(user_profile, follow_record(user_profile)), method: :delete %>
-    <% else %>
-        <%= button_to "Follow", user_follows_path(user_profile) %>
+<% if already_followed?(current_user, followed_user) %>
+    <%= form_tag user_follow_path(current_user, return_follow(current_user, followed_user)), method: :delete, class: "fllw_bttn" do %>
+        <%= submit_tag "Unfollow" %>
+    <% end %>
+<% else %>
+    <%= form_tag user_follows_path(current_user), class: "fllw_bttn" do %>
+        <%= hidden_field_tag :'follow[follower_id]', current_user.id %>
+        <%= hidden_field_tag :'follow[followed_user_id]', followed_user.id %>
+
+        <%= submit_tag "Follow" %>
     <% end %>
 <% end %>

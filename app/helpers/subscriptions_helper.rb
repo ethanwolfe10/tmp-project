@@ -1,7 +1,11 @@
 module SubscriptionsHelper
 
+    def invites?(user)
+        Subscription.where(user_id: user.id, confirmed: false)
+    end
+
     def status_check(user, group)
-        return false if Subscription.find_by(user_id: user.id, group_id: group.id)
+        return true if Subscription.find_by(user_id: user.id, group_id: group.id)
     end
 
     def subscription_exists(user)
