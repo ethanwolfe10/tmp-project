@@ -26,7 +26,9 @@
 </div>
 
 <% if @user.groups.empty? %>
-    <p> <%= @user.display_name %> Doesn't Belong to any Groups! </p>
+    <% if current_user != @user %>
+        <p> <%= @user.display_name %> Doesn't Belong to any Groups! </p>
+    <% end %>
 <% else %>
     <div class="joined_groups">
         <h2> Joined Groups: </h2>

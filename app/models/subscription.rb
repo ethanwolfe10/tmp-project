@@ -13,7 +13,6 @@ class Subscription < ApplicationRecord
     
 
     def check_color_format
-        binding.pry
         errors.add(:status_color, "Not Hexadecimal" ) unless status_color.start_with?("#")
     end
 

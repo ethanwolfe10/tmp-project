@@ -2,6 +2,11 @@
 <%= render 'post_details', post: @post %>
 
 <br>
-<%= render 'comments/index', collection: @post.comments %>
+
+
+<br>
+<%= if @post.group.subscribers.include?(current_user) %>
+    <%= render 'comments/index', collection: @post.comments, object: @post %>
+<% end %>
 
 

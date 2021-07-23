@@ -6,6 +6,7 @@
                 <li><%= link_to "Home", user_path(current_user)%></li>
                 <li><%= link_to "Your Groups", user_groups_path(current_user)%> </li>
                 <li><%= link_to "Sign Out", destroy_session_path(current_user), method: :delete%></li>
+                <li><%= link_to "Most Subscribed Group", groups_most_subscribers_path, method: :get %></li>
 
             </ul>
         </nav>

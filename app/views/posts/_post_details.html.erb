@@ -5,7 +5,7 @@
         <div class="post_div_title">
             <h1><%= link_to post.title, group_post_path(post.group, post) %></h1>
             <p>
-                By: <%= link_to post.user.display_name, user_path(post.user_id) %> || <%= render partial: 'users/status', locals: { group: post.group } %>
+                By: <%= link_to post.user.display_name, user_path(post.user_id) %> || <%= render partial: 'users/status', locals: { group: post.group, user: post.user } %>
             </p>
         </div>
 
@@ -28,6 +28,9 @@
                 
                
             <% else %>
+                <p class="post_likes">
+                    <%= post.likes.count %> <%= link_to "Likes", post_likes_path(post), method: :get %>
+                </p>
                 <%= link_to "Edit Post", edit_group_post_path(post.group_id, post) %>
                 <%= link_to "Delete Post", group_post_path(post.group_id, post), method: :delete, data: { confirm: "Really?" } %>
             <% end %>

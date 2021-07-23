@@ -4,7 +4,11 @@ class UsersController < ApplicationController
     before_action :set_username, only: :show
 
     def index
-        
+        if params[:query] == "invite"
+            @users = Group.find(params[:group_id]).invitees
+        else
+            @users = Group.find(params[:group_id]).subscribers
+        end       
     end
 
     def show
@@ -13,16 +17,18 @@ class UsersController < ApplicationController
         end
     end
 
+    def create
+        binding.pry
+    end
+
     def edit
         
     end
 
     def update
-        binding.pry
         if @user.update(user_params)
             @user.save
-            binding.pry
-            redirect_to user_path
+            redirect_to user_path(@user), flash: { notice: "Update Successful" }
         else
             redirect_to edit_user_path(current_user), flash: { error: "Update Unsuccessful" }
         end
@@ -33,6 +39,7 @@ class UsersController < ApplicationController
     def set_username
         if @user.display_name == nil
             @user.display_name = @user.username
+            @user.username = "@#{@user.username}"
             @user.save
         end
     end

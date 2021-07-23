@@ -2,7 +2,6 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   prepend_before_filter :require_no_authentication, only: [:cancel]
-  # before_action :set_username, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -46,10 +45,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   binding.pry
   #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
   # end
-
-  def set_username
-    binding.pry
-  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params

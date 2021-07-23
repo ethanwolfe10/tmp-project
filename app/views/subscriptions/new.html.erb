@@ -1,25 +1,39 @@
-<% if current_user.followers.empty? %>
+<%= render partial: 'groups/header', locals: { group: current_group } %>
 
-    <p>
-        No Eligible Followers To Invite!
-    </p>
+<%= form_tag subscriptions_path do %>
 
-<% else %>
+    <%= render "devise/shared/error_messages", resource: @sub %>
 
-    <%= form_tag subscriptions_path do %>
-        <%= render "devise/shared/error_messages", resource: @sub %>
+    <% if eligible_members? %>
+
+        <b> Invite People You Follow: </b>
+
+        <br>
+        <br>
+
+        <%= render partial: 'select_form', collection: current_user.followings, as: :fllwr %>
 
 
-        <% current_user.followers.each do |fllwr| %>
-            <% unless subscription_exists(fllwr) %>
-                <label> <%= fllwr.username %> </label>
-                <%= radio_button_tag :'subscription[user_id]', fllwr.id %>
-                <br>
-            <% end %>
-        <% end %>
-        
-        <%= render partial "hidden_values", locals: { group: current_group } %>
+    <% else %>
+
+        <p style='text-align:center;color:red;'>
+            No Eligible Followers To Invite! Here Are Some Users:
+        </p>
+
+        <br>
+
+        <%= render partial: 'select_form', collection: @users, as: :fllwr %>
 
     <% end %>
 
+    <br>
+
+    <%= submit_tag "Invite User" %>
+
 <% end %>
+
+
+
+
+
+    

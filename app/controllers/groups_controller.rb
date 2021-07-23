@@ -18,7 +18,7 @@ class GroupsController < ApplicationController
             @group.save
             redirect_to group_path(@group), flash: { notice: "Group Successfully Created" }
         else
-            redirect_to new_gorup_path
+            render :new
         end
     end
 
@@ -32,7 +32,6 @@ class GroupsController < ApplicationController
 
     def most_subscribers
         @group = Group.most_subscribers
-        binding.pry
     end
 
     def edit

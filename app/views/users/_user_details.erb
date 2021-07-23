@@ -2,13 +2,19 @@
     <div class="user_details">
 
         <h3 style="text-align:center;">
-            <%= link_to user_profile.username, user_path(user_profile) %>
+            <%= link_to user_profile.display_name, user_path(user_profile) %>
 
-            <% if in_a_group? %>
-                <%= render partial: 'status', locals: { user: user_profile, group: current_group }  %>
+            <% if in_a_group? && !defined?(followers) %>
+                <%= render partial: 'users/status', locals: { user: user_profile, group: current_group }  %>
             <% end %>
 
+            <p style="font-size:14px;">
+                <%= user_profile.username %>
+            </p>
+
         </h3>
+
+        
 
         <br>
 
@@ -29,13 +35,15 @@
         <p>
             <%= user_profile.followers.count %> <%= link_to 'Followers', user_follows_path(user_profile, :query => 'followers'), class: "follow_link" %> |
             <%= user_profile.followings.count %> <%= link_to 'Following', user_follows_path(user_profile), class: "follow_link" %>
-            <% if current_user != user_profile %>
-                <%= render 'follows/follow_button', followed_user: user_profile %>
+            <% if current_user != user_profile%>
+                <% if !defined?(new_sub_check) %>
+                    <%= render 'follows/follow_button', followed_user: user_profile %>
+                <% end %>
                 <br>
                 <br>
                 <%= link_to "#{user_profile.display_name}'s Groups", user_groups_path(user_profile), class: "follow_link"  %>
             <% else %>
-                <%= button_to "Edit Profile", edit_user_path(current_user) %>
+                <%= button_to "Edit Profile", edit_user_path(current_user), method: :get %>
             <% end %>
         </p>
         <br>

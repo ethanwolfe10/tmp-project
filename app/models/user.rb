@@ -16,8 +16,9 @@ class User < ApplicationRecord
   has_many :likes, through: :posts
   has_many :comments, through: :posts
 
-  validates :username, uniqueness: true, presence: true, length: { in: 4..20 }, format: { with: /\A[a-zA-Z0-9 ]+\z/, message: "does not allow special characters" }
-  validates :email, uniqueness: true, presence: true  
+  validates :display_name, presence: false, length: { maximum: 20 }
+  validates :email, uniqueness: true, presence: true
+  validates :username, uniqueness: true, presence: true, length: { in: 4..20 }
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -27,13 +28,17 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.username = "@#{auth.info.name}"   # assuming the user model has a name
+      user.username = "@#{auth.info.name.split(" ").join("")}"   # assuming the user model has a name
       user.display_name = auth.info.name   # assuming the user model has a name
       # user.image = auth.info.image # assuming the user model has an image
       # If you are using confirmable and the provider(s) you use validate emails, 
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
     end
+  end
+
+  def email_required?
+    false
   end
 
   

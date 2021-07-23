@@ -1,2 +1,3 @@
 <%= render 'groups/header', group: current_group %>
-<%= render partial: 'user_details', collection: current_group.subscribers, as: :user_profile %>
+
+<%= render partial: 'user_details', collection: @users, as: :user_profile %>

@@ -31,11 +31,11 @@ class Group < ApplicationRecord
     end
 
     def recent_posts
-        self.posts.order("created_at ASC")
+        self.posts.order("created_at DESC")
     end
     
     def old_posts
-        self.posts.order("created_at DESC")
+        self.posts.order("created_at ASC")
     end
 
     def create_first_subscriber

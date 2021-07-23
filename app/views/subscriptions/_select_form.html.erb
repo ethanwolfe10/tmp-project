@@ -1,0 +1,7 @@
+    <% unless subscription_exists(fllwr) %>
+        <%= radio_button_tag :'subscription[user_id]', fllwr.id %>
+        <%= render partial: 'users/user_details', locals: { user_profile: fllwr, followers: fllwr, new_sub_check: current_group } %>
+        <br>
+    <% end %>
+    
+    <%= render partial: "hidden_values", locals: { group: current_group } %>

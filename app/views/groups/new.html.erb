@@ -1,6 +1,8 @@
 <%= form_tag groups_path do %>
     
-  <%= render "devise/shared/error_messages", resource: @group %>
+    <%= render "devise/shared/error_messages", resource: @group %>
+
+    <br>
 
     <%= hidden_field_tag :'group[mod_id]', current_user.id %> 
     
@@ -15,6 +17,6 @@
         <%= text_field_tag :'group[bio]' %>
         <br>
     </div>
-    <%= submit_tag "Submit"%>
+    <%= submit_tag "Create Group"%>
 <% end %>
     

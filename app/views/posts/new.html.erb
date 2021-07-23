@@ -1,7 +1,9 @@
-<%= render 'header', group: @group %>
+<%= render 'groups/header', group: current_group %>
 <%= form_tag group_posts_path do %>
     
   <%= render "devise/shared/error_messages", resource: @post %>
+
+  <br>
 
     <%= hidden_field_tag :'post[user_id]', current_user.id %> 
     <%= hidden_field_tag :'post[group_id]', current_group.id %> 

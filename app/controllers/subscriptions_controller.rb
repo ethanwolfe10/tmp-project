@@ -5,6 +5,7 @@ class SubscriptionsController < ApplicationController
 
     def new
         @sub = Subscription.new
+        @users = User.all
     end
 
     def create
@@ -19,17 +20,15 @@ class SubscriptionsController < ApplicationController
     end
 
     def update
-        binding.pry
         if params[:query] 
             @sub.update(confirmed: true)
             notice = "Group Joined Successfully"
         else
-            binding.pry
             @sub.update(status: params[:subscription][:status], status_color: params[:subscription][:status_color])
             if @sub.valid?
                 @sub.save
             else
-                redirect_to group_path(@sub.group)
+                render :edit
             end
             notice = "Status Changed Successfully"
         end

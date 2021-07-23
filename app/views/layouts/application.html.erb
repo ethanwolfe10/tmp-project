@@ -13,7 +13,7 @@
   <body>
     <div class="wrapper">
         <% if user_signed_in? %>
-          <h1 style="border-bottom: 0px;"> Welcome, <%= current_user.username %>! </h1>
+          <h1 style="border-bottom: 0px;"> Welcome, <%= current_user.display_name %>! </h1>
           <%= render "devise/shared/flash" %>
           <%= render 'layouts/navbar' %>
         <% else %>

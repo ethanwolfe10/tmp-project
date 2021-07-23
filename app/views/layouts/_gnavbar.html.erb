@@ -1,7 +1,11 @@
 <div class="gnavbar" style="position: relative;">
         <nav>
             <ul>
-                <li><%= button_to 'Invite New Members', new_group_subscription_path(group), method: :get %></li>
+                <li><%= button_to "Confirmed Members", group_users_path(group), method: :get %></li>
+                <% if group.subscribers.include?(current_user) %>
+                    <li><%= button_to 'Invite New Members', new_group_subscription_path(group), method: :get %></li>
+                    <li><%= button_to 'Pending Invitations', group_users_path(group), method: :get, params: {query: "invite"}%></li>
+                <% end %>
                 <li><%= button_to 'Leave Group', subscription_path(current_sub(group, current_user)), method: :delete %></li>
                 <li><%= button_to "Create Post", new_group_post_path(group), method: :get %></li>
                 <% if current_user == group.mod %>
